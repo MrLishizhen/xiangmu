@@ -1,0 +1,38 @@
+*{/*清除所有的默认样式，加上抗锯齿化的样式*/
+	padding:0;
+	margin:0;
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+a{
+	text-decoration: none;
+	color:#000;
+}
+ul{
+	list-style:none;
+}
+.clearfix:after{
+	content:'';
+	display:block;
+	width:0;
+	height:0;
+	width:0;
+	clear:both;
+}
+
+.ellipsis{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+body,html{
+	width:100%;
+	height:100%;
+}
+
+html{
+	min-height: 600px;
+	min-width:1000px;
+	
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>个人中心</title>
+		<link rel="stylesheet" href="/static/reset.css">
+		<link rel="stylesheet" href="index.css">
+		<script>window.PointerEvent = undefined;</script>
+	</head>
+	<body>
+		<div class='page-warpper'>
+			<div class="header">
+				<div class="back" onclick="javascript:history.back()">
+					<span></span>
+				</div>
+				<h1>我的京东</h1>
+				<div class='right-function'>
+					<span></span>
+				</div>
+			</div>
+			<div class="content">
+				<div class='personal'>
+					<div class='personal-info'>
+						<div class='user-info'>
+							<img src="img/userimg.png" alt="">
+							<div class='personal-wrap'>
+								<h3 class='user-name'>
+									用户名:<span class='name'></span>
+								</h3>
+							</div>
+						</div>
+						<div class='account-wrap' onclick="location.href='/pages/account/index.html'">
+							<span></span>
+							账号管理
+						</div>
+						<div class='plus-black-wrap'>
+							<div class='inner'>
+								<div class='plus-title'>购买年卡得50元无门槛红包</div>
+								<div class='plus-subtitle'>立即前往</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- 付款等 -->
+					<div class='express-warpper'>
+						<div class='express'>
+							<div class='pending-payment'>
+								<div>待付款</div>
+							</div>
+							<div class='pending-received'>
+								<div>待收货</div>
+							</div>
+							<div class='after-sale'>
+								<div>退换/售后</div>
+							</div>
+							<div class='all-orders'>
+								<div>全部订单</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class='white-strip-warpper'>
+						<div class='white-strip'>
+							<div class=''>0张</div>
+							<span>京东卷</span>
+						</div>
+						<div class='white-strip'>
+							<div class=''>开通有礼</div>
+							<span>白条</span>
+						</div>
+						<div class='white-strip'>
+							<div class=''>0个</div>
+							<span>京豆</span>
+						</div>
+						<div class='white-strip'>
+							<div class=''>0元</div>
+							<span>红包</span>
+						</div>
+						<div class='white-strip'>
+							<div class='assets'></div>
+							<span>我的资产</span>
+						</div>	
+					</div>
+					
+					<div class='collection-war'>
+						<div class='collection'>
+							<div class='collection-div'>
+								<div>0</div>
+								<span>商品收藏</span>
+							</div>
+							<div class='collection-div'>
+								<div>0</div>
+								<span>店铺收藏</span>
+							</div>
+							<div class='collection-div'>
+								<div>25</div>
+								<span>我的足迹</span>
+							</div>
+						
+						</div>
+					</div>
+					
+					<div class='services'>
+						<div>
+							<img src="img/6.png" alt="">
+							<span>我的预约</span>
+						</div>
+						<div>
+							<img src="img/7.png" alt="">
+							<span>京东火车票</span>
+						</div>
+						<div>
+							<img src="img/8.png" alt="">
+							<span>应用推荐</span>
+						</div>
+						<div>
+							<img src="img/9.png" alt="">
+							<span>京东通信营业厅</span>
+						</div>
+						<div>
+							<img src="img/10.png" alt="">
+							<span>用户福利</span>
+						</div>
+						<div>
+							<img src="img/11.png" alt="">
+							<span>京东机票</span>
+						</div>
+						<div>
+							<img src="img/12.png" alt="">
+							<span>京东酒店</span>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+			<div class="footer">
+				<iframe src="/nav/index.html" frameborder="0"></iframe>
+			</div>
+		</div>
+
+		<script src='/static/jquery-3.4.1.js'></script>
+		<script src='/static/js-cookie.js'></script>
+		<script src="/static/noctive.js"></script>
+		<script src='/static/http.js'></script>
+		<script src='index.js'></script>
+	</body>
+</html>

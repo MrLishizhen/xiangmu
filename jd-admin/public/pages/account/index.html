@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>账号管理</title>
+		<link rel="stylesheet" href="/static/reset.css">
+		<link rel="stylesheet" href="index.css">
+		<script>window.PointerEvent = undefined;</script>
+	</head>
+	<body>
+		<div class='page-warpper'>
+			<div class="header">
+				<div class="back" onclick="javascript:history.back()">
+					<span></span>
+				</div>
+				<h1>账号设置</h1>
+				<div class='right-function'>
+					<span></span>
+				</div>
+			</div>
+			<div class="content">
+				<div class='account-section'>
+					<div class='administration'>账号管理</div>
+					<div class='account-title'>
+						<img src="img/userimg.png" alt="">
+						<h3>用户名: <span></span></h3>
+						<div class='account-tips'>当前登录用户</div>
+					</div>
+					
+				</div>
+				
+				<div class='address-war'>
+					<a href="/pages/address/index.html">
+						<span class='address-title'>收货地址管理</span>
+						<span class='address'>管理我的地址</span>
+					</a>
+				</div>
+				
+				<ul class='address-ul'>
+					<li class='item'>
+						<a href="/pages/testing/index.html">
+							<span class='address-title'>修改手机号</span>
+							<span class='address phone'></span>
+						</a>
+					</li>
+					<li class='item'>
+						<a href="">
+							<span class='address-title'>账号密码更改</span>
+							<span class='address'></span>
+						</a>
+					</li>
+					<li class='item'>
+						<a href="">
+							<span class='address-title'>支付密码</span>
+							<span class='address'>未设置</span>
+						</a>
+						
+					</li>
+					<li class='item'>
+						<a href="">
+							<span class='address-title'>关联账号</span>
+							<span class='address'></span>
+						</a>
+					</li>
+				</ul>
+				
+			</div>
+			<div class='footer'>
+				<button class='sign-out'>退出登录</button>
+			</div>
+		</div>
+		
+		<script src='/static/jquery-3.4.1.js'></script>
+		<script src='/static/js-cookie.js'></script>
+		<script src="/static/noctive.js"></script>
+		<script src='/static/http.js'></script>
+		<script src='index.js'></script>
+	</body>
+</html>

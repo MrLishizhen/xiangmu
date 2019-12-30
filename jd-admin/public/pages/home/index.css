@@ -1,0 +1,407 @@
+body {
+	background: url(imgs/beijing.jpg) no-repeat left top/100%;
+}
+
+.page-warpper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	height: 44px;
+	flex-shrink: 0;
+	display: flex;
+}
+
+/*左侧按钮*/
+.header>.catrgory-btn {
+	width: 40px;
+	flex-shrink: 0;
+}
+
+.catrgory-btn-title {
+	margin: 14px 0 0 15px;
+	display: inline-block;
+	width: 20px;
+	height: 18px;
+	background: url(imgs/h-1.png) no-repeat center center/100%;
+}
+
+/*头部中间搜索框*/
+.header>.search-warpper {
+	flex-grow: 1;
+	padding: 0 10px;
+	display: flex;
+	align-items: center;
+}
+
+.header>.search-warpper>.search {
+	width: 100%;
+	height: 30px;
+	background-color: #fff;
+	border-radius: 15px;
+	font-size: 0;
+	display: flex;
+	align-items: center;
+}
+
+.header>.search-warpper>.search>i {
+	height: 15px;
+}
+
+.header>.search-warpper>.search>i.search-left-logo {
+	width: 20px;
+	margin: 0 8px 0 15px;
+	background: url(imgs/h-2.png) no-repeat center/100%;
+	position: relative;
+
+}
+
+.header>.search-warpper>.search>i.search-left-logo::before {
+	content: '';
+	display: inline-block;
+	width: 1px;
+	height: 16px;
+	background-color: #CCCCCC;
+	position: absolute;
+	right: -8px;
+	top: 0;
+}
+
+.header>.search-warpper>.search>i.search-left-img {
+	width: 18px;
+	margin: 0 0 0 5px;
+	background: url(imgs/h-xuebi.png) no-repeat -80px 0/200px;
+
+}
+
+.header>.search-warpper>.search>input.search-input {
+	margin-left: 5px;
+	padding-left: 5px;
+	border: none;
+	outline: none;
+	font-size: 12px;
+}
+
+/*头部右侧*/
+.header>.header-right {
+	width: 40px;
+	flex-shrink: 0;
+	line-height: 44px;
+	text-align: left;
+}
+
+.header>.header-right>.not-sign-in-title {
+	font-size: 14px;
+	color: #fff;
+}
+
+/*未登录状态*/
+.header>.header-right.not-sign-in {}
+
+/*登录状态*/
+.header>.header-right.sign-in {
+	display: none;
+}
+.content-warpper{
+	overflow: auto;
+	flex-grow: 1;
+}
+.content {
+	flex-grow: 1;
+	overflow: hidden;
+
+}
+
+.content>.banner {
+	overflow: hidden;
+	position: relative;
+	font-size: 0;
+	touch-action: pan-x;
+	margin-bottom: 5px;
+}
+
+.content>.banner>ul.scroll {
+	width: 900%;
+	display: flex;
+}
+
+.content>.banner>ul.scroll>li {
+	flex-grow: 1;
+	font-size: 0;
+}
+
+.content>.banner>ul.scroll>li>a {
+
+	display: block;
+	width: 100%;
+	height: 140px;
+	box-sizing: border-box;
+	padding: 0 10px;
+
+
+}
+
+.content>.banner>ul.scroll>li>a>img {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+}
+
+.content>.banner>.indicator {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 10px;
+}
+
+.content>.banner>.indicator>span {
+	display: inline-block;
+	width: 8px;
+	height: 3px;
+	margin: 0 2px;
+	background: hsla(0, 0%, 92.9%, .4);
+}
+
+.content>.banner>.indicator>span.active {
+	background-color: #fff;
+	width: 10px;
+}
+
+
+
+.box_list {
+	background-color: #f6f6f6;
+	overflow: hidden;
+	touch-action: pan-x;
+}
+
+.box_list>.scroll {
+	width: 200%;
+	display: flex;
+}
+
+.box_list>.scroll>div {
+
+	flex-grow: 1;
+}
+
+.box_list>.scroll>div>a {
+	width: 20%;
+	float: left;
+	text-align: center;
+	display: block;
+	color: #666;
+}
+
+.box_list>.scroll>div>a>img {
+	width: 40px;
+	display: block;
+	margin: 10px auto 0;
+}
+
+.box_list>.scroll>div>a>span {
+	font-size: 12px;
+	margin-top: 6px;
+}
+
+.box_list>.indicator {
+	text-align: center;
+}
+
+.box_list>.indicator>span {
+	width: 5px;
+	height: 5px;
+	opacity: 1;
+	background-color: rgba(0, 0, 0, .2);
+	box-sizing: border-box;
+	border-radius: 50%;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 3px;
+}
+
+.box_list>.indicator>span.active {
+	background-color: #e93b3d;
+	width: 10px;
+	height: 5px;
+	border-radius: 3px;
+	opacity: .7;
+}
+
+
+.seckill-warpper {
+	padding: 0 10px 10px;
+	background-color: #f6f6f6;
+	
+}
+
+.seckill {
+	border-radius: 10px;
+	background-color: #fff;
+	
+}
+
+.seckill>.seckill-header {
+	height: 35px;
+	background: url(imgs/msb.png) no-repeat center center/100%;
+}
+
+.seckill>.seckill-header>a {
+	display: inline-block;
+	line-height: 35px;
+}
+
+.seckill>.seckill-header>.seckill-header-left>span {
+	display: inline-block;
+	float: left;
+	margin-left:10px;
+	width: 75px;
+	height: 30px;
+	background: url(imgs/ms.png) no-repeat left center/100%;
+}
+
+.seckill>.seckill-header>.seckill-header-left>strong {
+	font-weight: normal;
+	font-size: 12px;
+	margin-left: 5px;
+}
+
+.seckill>.seckill-header>a>.time {
+	display: inline-block;
+	margin-left: 5px;
+}
+
+.seckill>.seckill-header>a>.time>span {
+	font-size: 12px;
+	width: 18px;
+	line-height: 17px;
+	border: 1px solid #dfdfdf;
+	background-color: #fff;
+}
+
+.seckill>.seckill-header>a>.time>i {}
+
+
+.seckill>.seckill-header>.seckill-header-right {
+	font-size: 10px;
+	color: #f23030;
+	float: right;
+	padding-right: 24px;
+	position: relative;
+}
+
+.seckill>.seckill-header>.seckill-header-right>.seckill-header-right-img {
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	background: url(imgs/right.png) center center/100%;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+}
+
+.seckill>.seckill-content {
+	overflow-y: hidden;
+	height: 120px;
+}
+
+.seckill>.seckill-content>.seckill-list {
+	width: 550px;
+	overflow-y: auto;
+}
+
+.seckill>.seckill-content>.seckill-list>li {
+	width: 84px;
+	padding: 0 5px;
+	box-sizing: border-box;
+	float: left;
+}
+
+.seckill>.seckill-content>.seckill-list>li>a {
+	display: block;
+	text-align: center;
+	font-size: 0;
+}
+
+.seckill>.seckill-content>.seckill-list>li>a>img {
+	width: 100%;
+}
+
+.seckill>.seckill-content>.seckill-list>li>a>span {
+	font-size: 12px;
+	color: #e93b3d;
+}
+
+.seckill>.seckill-content>.seckill-list>li>a>span>em {
+	font-style: normal;
+	font-size: 16px;
+
+}
+
+.seckill>.seckill-content>.seckill-list>li>a>del {
+	font-size: 12px;
+	color: #999;
+}
+
+
+/* 新人 */
+.xr-vip-warpper{
+	padding: 0 10px;
+	background-color: #f6f6f6;
+}
+.xr-vip-warpper>.xr-vip{
+	display:flex;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.xr-vip-warpper>.xr-vip>a{
+	width:50%;
+}
+.xr-vip-warpper>.xr-vip>a>img{
+	width:100%;
+}
+
+.low-price{
+	display:flex;
+	padding: 10px 10px 0;
+	
+	background-color: #f6f6f6;
+}
+
+.low-price>div{
+	width:33.333333%;
+}
+.low-price>div>a{
+	
+}
+.low-price>div>a>img{
+	width:100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer {
+	height: 55px;
+	flex-shrink: 0;
+}
+
+iframe {
+	width: 100%;
+	height: 100%;
+}
