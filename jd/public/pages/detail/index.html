@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name='viewport' content="width=device-width,initial-scale=1.0">
+		<link rel="stylesheet" href="/static/reset.css">
+		<link rel="stylesheet" href="index.css">
+		<title>详情页</title>
+		<script>window.PointerEvent = undefined;</script>
+	</head>
+	<body>
+		<!-- 内容区 -->
+		<div class="page-warpper  hide-scroll-bar">
+			<div class="header">
+				<div class='back' onclick="javascript:history.back()">
+					<span></span>
+				</div>
+				<div class='aggregate-function'>
+					<span></span>
+				</div>
+			</div>
+			<div class='content hide-scroll-bar'>
+				<div class="banner">
+					<ul class="scroll">
+						
+					</ul>
+					<!-- 轮播图的提示符 -->
+					<div class='banner-tips'>
+						
+					</div>
+				</div>
+				
+				<div class='details'>
+					<div class='price-warpper'>
+						￥<span class='price'></span>.00
+					</div>
+					<div class='name-warpper'>
+						<h1 class='name'></h1>
+					</div>
+					<div class='remark-warpper'>
+						<span class='remark'></span>
+					</div>
+				</div>
+				<div class='kh'></div>
+				<div class='discount'>
+					<div class='discount-title'>优惠</div>
+					<div class='discount-body'>
+						<p>购买1-5件时享受单件价￥1098，超出数量以结算价为准</p>
+						<p>体验卡免费领，超大流量任性用</p>
+					</div>
+					<div class='discount-footer'>
+						<span class='discount-footer-img'></span>
+					</div>
+				</div>
+				<div class='kh'></div>
+				<img src="11.png" alt="" class='moren' style='margin-bottom:50px'>
+			</div>
+			<div class="footer">
+				<div class='cart-function'>
+					<div class='cart' onclick="location.href='/pages/cart/index.html'">
+						<i class='number'>0</i>
+						<i class='cart-img'></i>
+						<span class='cart-name'>购物车</span>
+					</div>
+				</div>
+				<div class='cart-btn'>加入购物车</div>
+				<div class='buy'>立即购买</div>
+			</div>
+		</div>
+		
+		<!-- 弹层区 -->
+		
+		<div class='dialog-wrapper'>
+			<div class='dialog'>
+				<div class="header">
+					<img src="img.jpg" alt="" class="avatar">
+					<div class='header-title'>
+						<div class="price-warpper">
+							￥<em class='price'>2000</em>.00
+						</div>
+						<div class="name">vivo【至高优惠100】iQOO Neo骁龙845 4500mAh强悍续航4G全网通拍照手机 电光紫 8GB 128GB</div>
+					</div>
+				</div>
+				<div class="content">
+					<div class='count-wrapeer'>
+						数量
+						<span class='incentive'>+</span>
+						<span class='count'>1</span>
+						<span class='decrease'>-</span>
+					</div>
+				</div>
+				<button class='dialog-btn'>确认</button>
+			</div>
+			
+		</div>
+		<script src='/static/jquery-3.4.1.js'></script>
+		<script src='/static/imagesloaded.js'></script>
+		<script src='/static/iscroll-probe.js'></script>
+		<script src="/static/noctive.js"></script>
+		<script src="/static/js-cookie.js"></script>
+		<script src='/static/http.js'	></script>
+		<script src='index.js'></script>
+	</body>
+</html>

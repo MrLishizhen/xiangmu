@@ -1,0 +1,325 @@
+.page-warpper {
+	width: 100%;
+	height: 100%;
+	flex-direction: column;
+	display: flex;
+}
+
+/*头部*/
+.header {
+	height: 44px;
+	flex-shrink: 0;
+	display: flex;
+}
+
+.header>.back {
+	width: 40px;
+	flex-shrink: 0;
+	display: flex;
+}
+
+.header span {
+	width: 20px;
+	height: 20px;
+	margin: 12px 0 0 10px;
+}
+
+.header>.back>span {
+	background: url(img/back.png) no-repeat center center/100%;
+}
+
+.header>h1 {
+	flex-grow: 1;
+	text-align: center;
+	color: #333;
+	font-size: 16px;
+	line-height: 44px;
+	font-weight: 400;
+
+}
+
+.header>.right-function {
+	width: 40px;
+	flex-shrink: 0;
+	display: flex;
+}
+
+.header>.right-function>span {
+	background: url(img/right.png) no-repeat center center/100%;
+}
+
+/*中间内容区*/
+.content {
+	flex-grow: 1;
+	background-color: #f7f7f7;
+}
+
+.content>.personal {
+	width: 100%;
+	height: 100%;
+}
+
+
+.content>.personal>.personal-info {
+	padding-top: 25px;
+	background: linear-gradient(90deg, #eb3c3c, #ff7459);
+	/* min-height: 110px; */
+	/* display:flex; */
+	position: relative;
+	border-radius: 0 0 300px 300px / 0 0 20px 20px;
+	overflow: hidden;
+
+}
+
+.content>.personal>.personal-info>.user-info {
+	padding: 0 15px;
+	display: flex;
+}
+
+.content>.personal>.personal-info>.user-info>img {
+	width: 60px;
+	height: 60px;
+	flex-shrink: 0;
+}
+
+.content>.personal>.personal-info>.user-info>.personal-wrap {
+	flex-grow: 1;
+	line-height: 60px;
+	padding-left: 15px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.content>.personal>.personal-info>.user-info>h3 {}
+
+.content>.personal>.personal-info>.user-info>h3>span.name {}
+
+.content>.personal>.personal-info>.account-wrap {
+	height: 40px;
+	font-size: 12px;
+	line-height: 40px;
+	padding-left: 14px;
+	color: rgba(76, 0, 0, 0.7);
+	position: absolute;
+	top: 0;
+	right: 15px;
+}
+
+.content>.personal>.personal-info>.account-wrap>span {
+	position: absolute;
+	top: 14px;
+	left: 0;
+	display: block;
+	width: 12px;
+	height: 12px;
+	background: url(img/luo.png) no-repeat center center/100%;
+}
+
+.content>.personal>.personal-info>.plus-black-wrap {
+	padding: 0 20px;
+	height: 37px;
+	margin-top: 10px;
+}
+
+.content>.personal>.personal-info>.plus-black-wrap>.inner {
+	height: 100%;
+	background: url(img/plus.png) center center/100%;
+	box-sizing: border-box;
+	padding: 10px;
+	display: flex;
+}
+
+.content>.personal>.personal-info>.plus-black-wrap>.inner>.plus-title {
+	flex-grow: 1;
+	font-size: 12px;
+	color: #FFE678;
+}
+
+.content>.personal>.personal-info>.plus-black-wrap>.inner>.plus-title::before {
+	display: block;
+	height: 12px;
+	width: 57px;
+	content: '';
+	float: left;
+	margin-top: 3px;
+	background: url(img/zx.png) no-repeat center center/100%;
+}
+
+.content>.personal>.personal-info>.plus-black-wrap>.inner>.plus-title::after {
+	content: '';
+	width: 1px;
+	height: 7px;
+	background: #FFE678;
+	display: block;
+	float: left;
+	margin: 5px 5px 0;
+}
+
+.content>.personal>.personal-info>.plus-black-wrap>.inner>.plus-subtitle {
+	width: 58px;
+	height: 18px;
+	flex-shrink: 0;
+	font-size: 12px;
+	color: #FFE678;
+}
+
+/*订单*/
+.content>.personal>.express-warpper {
+	margin: 15px 0;
+	background-color: #fff;
+}
+
+.content>.personal>.express-warpper>.express {
+	height: 72px;
+	display: flex;
+
+}
+
+.content>.personal>.express-warpper>.express>div {
+	width: 25%;
+	line-height: 42px;
+	text-align: center;
+	color: #666;
+	font-size: 12px;
+}
+
+.content>.personal>.express-warpper>.express>div>div {
+	margin-top: 30px;
+}
+
+.content>.personal>.express-warpper>.express>div.pending-payment {
+	background: url(img/1.png) 50%/auto 20px no-repeat;
+	background-position: 50% 25%;
+}
+
+.content>.personal>.express-warpper>.express>div.pending-received {
+	background: url(img/2.png) 50%/auto 20px no-repeat;
+	background-position: 50% 25%;
+}
+
+
+.content>.personal>.express-warpper>.express>div.after-sale {
+	background: url(img/3.png) 50%/auto 20px no-repeat;
+	background-position: 50% 25%;
+}
+
+.content>.personal>.express-warpper>.express>div.all-orders {
+	background: url(img/4.png) 50%/auto 20px no-repeat;
+	background-position: 50% 25%;
+	position: relative;
+}
+.content>.personal>.express-warpper>.express>div.all-orders>span{
+	position: absolute;
+	width:10px;
+	height:10px;
+	font-size:10px;
+	background-color: #E2231A;color:#fff;
+	border-radius: 50%;
+	line-height: 10px;
+	text-align: center;
+	right:30px;
+	top:10px;
+	}
+.content>.personal>.white-strip-warpper {
+	height: 72px;
+	display: flex;
+	font-size: 12px;
+	text-align: center;
+	background-color: #fff;
+}
+
+.content>.personal>.white-strip-warpper>div {
+	width: 25%;
+	padding: 17px 0 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.content>.personal>.white-strip-warpper>div.white-strip>div {
+	color: #e93b3d;
+}
+
+.content>.personal>.white-strip-warpper>div.white-strip>span {
+	flex-grow: 1;
+	text-align: center;
+	line-height: 34px;
+}
+
+.content>.personal>.white-strip-warpper>div.white-strip>div.assets {
+	height: 16px;
+	flex-shrink: 0;
+	background: url(img/5.png) no-repeat center center/auto 100%;
+}
+
+.content>.personal>.collection-war {
+	margin: 15px 0;
+	background-color: #fff;
+	height: 76px;
+	padding: 17px 0 10px;
+	box-sizing: border-box;
+}
+
+.content>.personal>.collection-war>.collection {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.content>.personal>.collection-war>.collection>.collection-div {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.content>.personal>.collection-war>.collection>.collection-div>div {
+	height: 18px;
+
+}
+
+.content>.personal>.collection-war>.collection>.collection-div>span {
+	flex-grow: 1;
+	font-size: 12px;
+	color: #666;
+	line-height: 34px;
+}
+
+.services {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #fff;
+}
+
+.services>div {
+	box-sizing: border-box;
+	padding: 10px 0 8px;
+	width: 25%;
+	height: 65px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.services>div>img {
+	width: 20px;
+	height: 20px;
+	margin: 0 auto 7px;
+}
+
+.services>div>span {
+	font-size: 12px;
+}
+
+
+/*底部栏*/
+.footer {
+	flex-shrink: 0;
+	height: 55px;
+}
+
+.footer>iframe {
+	width: 100%;
+	height: 100%;
+}
+.all-orders

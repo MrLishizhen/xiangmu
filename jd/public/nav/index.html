@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../static/reset.css" />
+		<link rel="stylesheet" type="text/css" href="index.css" />
+		<title>页脚</title>
+	</head>
+	<body>
+		<ul class="jd-nav">
+			<li>
+				<a href="javascript:window.parent.location.href='/pages/home/index.html'">
+					<i></i>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:window.parent.location.href='/pages/category/index.html'">
+					<i></i>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:window.parent.location.href='/pages/homepage/index.html'">
+					<i></i>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:window.parent.location.href='/pages/cart/index.html'">
+					<i></i>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:window.parent.location.href='/pages/profile/index.html'">
+					<i></i>
+				</a>
+			</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		//根据当前window.parent.location.href值,动态确定某一li为active
+		var paths = [
+			"/pages/home/index.html",
+			"/pages/category/index.html",
+			"/pages/jingxi/index.html",
+			"/pages/cart/index.html",
+			"/pages/profile/index.html",
+		];
+		var i = paths.indexOf(window.parent.location.pathname);
+		document.querySelectorAll('ul.jd-nav>li')[i].className = 'active';
+	</script>
+</html>

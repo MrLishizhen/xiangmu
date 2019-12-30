@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<link rel="stylesheet" href="/static/reset.css">
+		<link rel="stylesheet" href="index.css">
+		<link rel="stylesheet" href="address-picker.css">
+		<script>window.PointerEvent = undefined;</script>
+		<title>地址</title>
+	</head>
+	<body>
+
+		<!-- 普通状态 -->
+		<div class='page-warpper list'>
+			<div class="header">
+				<a href="#" onclick="javascript:history.back()"><span>&lt;</span></a>
+				<h1>收货地址</h1>
+			</div>
+			<div class='content'>
+				<div class='address-list' style='display:none'>
+					<ul class='ul-list'></ul>
+				</div>
+				<div class='address-empty' style="display:none">
+					<img src="empty.png" alt="">
+					<p>该账号还没有收货地址</p>
+				</div>
+			</div>
+			<div class="footer">
+				<button class='add-address'>新增地址</button>
+			</div>
+		</div>
+
+		<!-- 编辑状态 -->
+		<div class='page-warpper edit' style="display:none">
+			<div class="header">
+				<a href="#" class='edit-back'><span>&lt;</span></a>
+				<h1>编辑地址</h1>
+
+			</div>
+			<div class='content'>
+				<form action="">
+					<div class='edit-address'>
+						<span>收货人:</span>
+						<input type="text" class='receiveName' placeholder="请输入收货人的姓名" value=''>
+					</div>
+					<div class='edit-address'>
+						<span>电话:</span>
+						<input type="text" class='receivePhone' placeholder="请输入收货人的电话" value=''>
+					</div>
+					<div class='edit-address'>
+						<span>所在地区:</span>
+						<input type="text" class='receiveRegion' placeholder="请输入收货人的所在地区" onfocus="focusHandler(this)" value=''>
+					</div>
+					<div class='edit-address'>
+						<span>详细地址:</span>
+						<input type="text" class='receiveDetail' placeholder="请输入收货人的详细地址" value=''>
+					</div>
+				</form>
+
+
+				<div class='remove-war'>
+					<button class='deposit'>保存</button>
+					<button class='btn-remove' style="display:none">删除当前地址</button>
+				</div>
+			</div>
+
+		</div>
+
+
+		<script src='/static/jquery-3.4.1.js'></script>
+		<script src='/static/imagesloaded.js'></script>
+		<script src='/static/iscroll-probe.js'></script>
+		<script src='regions.js'></script>
+		<script src="/static/js-cookie.js"></script>
+		<script src="/static/noctive.js"></script>
+		<script src='/static/http.js'></script>
+		<script src='address-picker.js'></script>
+		<script src='index.js'></script>
+	</body>
+</html>

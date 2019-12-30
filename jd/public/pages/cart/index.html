@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name='viewport' content="width=device-width,inital-scale=1.0 " />
+		<link rel="stylesheet" href="/static/reset.css">
+		<link rel="stylesheet" href="index.css">
+		<title>购物车</title>
+		<script>window.PointerEvent = undefined;</script>
+	</head>
+	<body>
+		
+		<div class='page-warpper'>
+		
+				<div class="header">
+					<!-- 头部内容 -->
+					<a href="#" onclick="javascript:history.back()"></a>
+					<h1>购物车</h1>
+					<div class=''></div>
+				</div>
+				<div class="content">
+					<!-- 下面内容区 -->
+					<div class="content-hd">
+						<div class='region'>北京朝阳区</div>
+						<div class='btn-edit'>编辑商品</div>
+					</div>
+					<div class="content-body">
+						<ul class='list'>
+							
+						</ul>
+						
+						<div class="login-tips">
+							登录后可同步购物车哦!
+							<a href="/pages/login/index.html" class='login-button' onclick="Cookies.set('target','/pages/cart/index.html')">登录</a>
+						</div>
+						<div class='login-tips-img'>
+							<img src="c1.png" alt="">
+							<p>登录后可同步购物车中商品</p>
+						</div>
+						<div class='empty-cart'>
+							<img src="c1.png" alt="">
+							<p>你还没有选购商品哦~~</p>
+							<a href="/pages/category/index.html">去逛逛</a>
+						</div>
+					</div>
+				</div>
+				<div class="footer normal">
+					<div class='checkbox-all-wrapper'>  
+						<i class='checkbox all normal checked'></i>  <span>全选</span>
+					</div>
+					<div class='account-wrapeer'>
+						总计:<span class='account'></span>
+					</div>
+					<div class='settlement'>去结算<span class='total-normal'></span></div>
+				</div>
+				<div class='footer edit'>
+					<div class='checkbox-all-wrapper'>
+						<i class='checkbox all edit'></i> <span>全选</span>
+					</div>
+					<button class='btn-remove disabled'>
+						删除
+					</button>
+				</div>
+
+		</div>
+		
+		<script src='/static/jquery-3.4.1.js'></script>
+		<script src='/static/imagesloaded.js'></script>
+		<script src='/static/iscroll-probe.js'></script>
+		<script src="/static/js-cookie.js"></script>
+		<script src="/static/noctive.js"></script>
+		<script src='/static/http.js'></script>
+		<script src='index.js'></script>
+	</body>
+</html>
