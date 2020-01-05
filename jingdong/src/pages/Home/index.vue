@@ -39,85 +39,85 @@
                 <div class='box_list' ref="box_list">
                     <div class='scroll'>
                         <div class=''>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-3.png" alt="">
                                 <span>京东超市</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-4.png" alt="">
                                 <span>数码电器</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-5.png" alt="">
                                 <span>京东服饰</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-6.png" alt="">
                                 <span>京东生鲜</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-7.png" alt="">
                                 <span>京东到家</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-8.png" alt="">
                                 <span>充值缴费</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-9.png" alt="">
                                 <span>9.9元拼</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-10.png" alt="">
                                 <span>领券</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-11.png" alt="">
                                 <span>赚钱</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-12.png" alt="">
                                 <span>PLUS会员</span>
                             </router-link>
                         </div>
                         <div class=''>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-13.png" alt="">
                                 <span>海囤全球</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-14.png" alt="">
                                 <span>京东拍卖</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-15.png" alt="">
                                 <span>唯品会</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-16.png" alt="">
                                 <span>玩3C</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-17.png" alt="">
                                 <span>沃尔玛</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-18.png" alt="">
                                 <span>美妆馆</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-19.png" alt="">
                                 <span>京东旅行</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-20.png" alt="">
                                 <span>拍拍二手</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-21.png" alt="">
                                 <span>物流查询</span>
                             </router-link>
-                            <router-link to=''>
+                            <router-link to='./Category'>
                                 <img src="./imgs/h-22.png" alt="">
                                 <span>全部</span>
                             </router-link>
@@ -152,42 +152,42 @@
                         <div class='seckill-content  hide-scroll-bar'>
                             <ul class='seckill-list'>
                                 <li>
-                                    <router-link to=''>
+                                    <router-link to='./Category'>
                                         <img src="./imgs/h-23.png" alt="">
                                         <span>￥<em>3555</em></span>
                                         <del>￥4555</del>
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link to=''>
+                                    <router-link to='./Category'>
                                         <img src="./imgs/h-24.jpg" alt="">
                                         <span>￥<em>3555</em></span>
                                         <del>￥4555</del>
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link to=''>
+                                    <router-link to='./Category'>
                                         <img src="./imgs/h-25.jpg" alt="">
                                         <span>￥<em>3555</em></span>
                                         <del>￥4555</del>
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link to=''>
+                                    <router-link to='./Category'>
                                         <img src="./imgs/h-27.jpg" alt="">
                                         <span>￥<em>3555</em></span>
                                         <del>￥4555</del>
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link to=''>
+                                    <router-link to='./Category'>
                                         <img src="./imgs/h-31.jpg" alt="">
                                         <span>￥<em>3555</em></span>
                                         <del>￥4555</del>
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link to=''>
+                                    <router-link to='./Category'>
                                         <img src="./imgs/h-33.jpg" alt="">
                                         <span>￥<em>3555</em></span>
                                         <del>￥4555</del>
@@ -202,10 +202,10 @@
                 <!-- 新人专享 -->
                 <div class='xr-vip-warpper'>
                     <div class='xr-vip'>
-                        <router-link to=''>
+                        <router-link to='./Category'>
                             <img src="./imgs/h-34.png" alt="">
                         </router-link>
-                        <router-link to=''>
+                        <router-link to='./Category'>
                             <img src="./imgs/h-35.png" alt="">
                         </router-link>
                     </div>
@@ -215,17 +215,17 @@
                 <!-- 低价通栏 -->
                 <div class='low-price'>
                     <div>
-                        <router-link to=''>
+                        <router-link to='./Category'>
                             <img src="./imgs/h-36.jpg" alt="">
                         </router-link>
                     </div>
                     <div>
-                        <router-link to=''>
+                        <router-link to='./Category'>
                             <img src="./imgs/h-37.jpg" alt="">
                         </router-link>
                     </div>
                     <div>
-                        <router-link to=''>
+                        <router-link to='./Category'>
                             <img src="./imgs/h-38.jpg" alt="">
                         </router-link>
                     </div>
@@ -307,6 +307,7 @@
                         scrollX: true, //开启横向滚动
                         snap: true, //开启scroll轮播图滚动模式
                         momentum: false, //关闭scroll惯性滚动
+	                    click:true,//开启默认点击事件
                     });
 
                     this.bannerScroll.on('scrollStart', () => {

@@ -103,6 +103,7 @@
 <script type="text/ecmascript-6">
     import imagesloaded from 'imagesloaded';
     import IScroll from 'iscroll';
+    import cookies from 'js-cookie';
 
     export default {
         data() {
@@ -191,13 +192,15 @@
         created() {
             this.id = parseInt(this.$route.params.id)||14;
 
-            this.$http({url:'/cart/total',method:'get'}).then(total=>{
+           if(cookies.get('token')){
+                   this.$http({url:'/cart/total',method:'get'}).then(total=>{//这个地方有问题加个if就可以了
 
-                if(total>0){
-                    this.total_isShow=true;
-                }
-                this.total=total;
-            })
+                           if(total>0){
+                                   this.total_isShow=true;
+                           }
+                           this.total=total;
+                   })
+           }
 
         },
     }

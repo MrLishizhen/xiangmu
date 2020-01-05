@@ -18,7 +18,7 @@
 			methods:{
 				search(){
 					this.$emit('searchName',this.name);
-					console.log(1);
+
 				}
 			},
         };

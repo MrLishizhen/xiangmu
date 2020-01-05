@@ -12,7 +12,7 @@
 			</router-link>
 		</li>
 		<li>
-			<router-link to="/tatale">
+			<router-link to="./Category">
 				<i></i>
 			</router-link>
 		</li>
