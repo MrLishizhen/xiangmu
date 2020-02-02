@@ -15,7 +15,10 @@ const router =new VueRouter({
            {path:'/sousuo',component:pages.sousuo},
            {path:'/details/:id',component:pages.details},//歌单详情页
            {path:'/play/:gid',component:pages.play},//歌曲播放页
-           {path:'/login',component:pages.login}//登录
-   ]
+           {path:'/login',component:pages.login},//登录
+           {path:'/register',component:pages.register},//注册
+           {path:'/setUp',component:pages.setUp},//退出登录
+
+           ]
 });
 export default router

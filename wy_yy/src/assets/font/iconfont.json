@@ -13,11 +13,39 @@
       "unicode_decimal": 58903
     },
     {
+      "icon_id": "690684",
+      "name": "YDUI-上一曲",
+      "font_class": "yduishangyiqu",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "887857",
+      "name": "暂停",
+      "font_class": "zanting",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
       "icon_id": "908771",
       "name": "点赞-b",
       "font_class": "dianzanb",
       "unicode": "e6bb",
       "unicode_decimal": 59067
+    },
+    {
+      "icon_id": "1115041",
+      "name": "关注",
+      "font_class": "guanzhu",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "1159894",
+      "name": "圆循环播放",
+      "font_class": "yuanxunhuanbofang",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
     },
     {
       "icon_id": "1203690",
@@ -32,6 +60,20 @@
       "font_class": "fangdajing",
       "unicode": "e646",
       "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "3216218",
+      "name": "随机",
+      "font_class": "icon--",
+      "unicode": "e77d",
+      "unicode_decimal": 59261
+    },
+    {
+      "icon_id": "3248710",
+      "name": "暂停",
+      "font_class": "zanting1",
+      "unicode": "e600",
+      "unicode_decimal": 58880
     },
     {
       "icon_id": "4553720",
@@ -53,6 +95,34 @@
       "font_class": "arrow-",
       "unicode": "e628",
       "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "9148970",
+      "name": "循环",
+      "font_class": "weimingmingwenjianjia_xunhuan",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "11391498",
+      "name": "歌单",
+      "font_class": "gedan",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "11493880",
+      "name": "下载",
+      "font_class": "xiazai1",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "12754197",
+      "name": "左箭头",
+      "font_class": "zuojiantou_huaban",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
     }
   ]
 }

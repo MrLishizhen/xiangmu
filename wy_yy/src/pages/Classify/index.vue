@@ -18,8 +18,10 @@
 			<div class="gedan_box ">
 				<div class="gedan_overflow  hide-scroll-bar">
 					<div class="gedan clearfix  hide-scroll-bar">
-						<router-link class="gedan_item" v-for="item in playArr" :key="item.id" :to="`/details/${item.id}`">
-							<img :src="item.coverImgUrl" :alt="item.name">
+						<router-link class="gedan_item" v-for="item in playArr" :key="item.id"
+						             :to="`/details/${item.id}`">
+							<div class="gedan_img"><img :src="item.coverImgUrl"
+							                            :alt="item.name"></div>
 							<div class="name_box">
 								<div class="copywriter ellipsis"
 								     v-text="item.copywriter"></div>
@@ -156,6 +158,7 @@
 	.name_box > .name {
 		color: #333;
 		margin-bottom: 2rem;
+		font-size:1.2rem;
 	}
 
 	.name_box > .copywriter {
@@ -166,10 +169,17 @@
 
 	.gedan_item > .name_box {
 		font-size: 1.2rem;
+		min-height: 4rem;
 
 	}
 
-	.gedan_item > img {
+	.gedan_img {
+		width:100%;
+		flex-grow: 1;
+	}
+
+	.gedan_item>.gedan_img > img {
+		height:100%;
 		width: 100%;
 		border-radius: 0.5rem;
 
@@ -180,8 +190,10 @@
 		box-sizing: border-box;
 		float: left;
 		padding: 0 0.5rem 0.5rem 0;
-		min-height: 20rem;
+		height: 20rem;
 		margin-top: 0.5rem;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.gedan_box .gedan {
@@ -235,7 +247,7 @@
 		position: absolute;
 		background-color: #fff;
 		bottom: 0;
-
+		overflow: auto;
 	}
 
 	.show_fl > h3 {

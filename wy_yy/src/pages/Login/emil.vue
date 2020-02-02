@@ -25,7 +25,7 @@
 				<div class="clause_box">
 					<div class="clause_cont">
 						本音乐网站仅是个人练习网站，不是商业性网站。所用数据来自于网易云音乐，希望各位
-						在使用过程中遵循网易云公司的规则，不要出现任何违规操作。在登录过程中也是使用的网易云邮箱账号，暂不提供手机号登录。
+						在使用过程中遵循网易云公司的规则，不要出现任何违规操作。在登录过程中只能使用手机号登录，暂不提供邮箱登录。
 					</div>
 					<div class="clause_cont">
 						如果有任何意见、提议：(请把各位的提议或者意见)发送邮箱至   <span class="red">718647063@qq.com</span>。
@@ -47,9 +47,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+import cookie from 'js-cookie';
         export default {
                 name:'emil',
+                beforeRouteEnter(to,from,next){
+                        cookie.set('target',from.path);
+                        next();//放行
+                },
                 data(){
                         return {
                                 emil:'',
@@ -67,7 +71,13 @@
                         login(){
 				//需要注意的点，三目绑定运算符需要在函数名后面加上()
                                this.$http({url:`/login?email=${this.emil}@163.com&password=${this.pwd}`}).then(result=>{
-                                       console.log(1);
+//					this.$store.dispatch('user/init',result.account);//保存到vuex中
+
+	                               this.$store.commit('user/init',result.account);
+	                               let uid=result.account.id
+	                               cookie.set('uid',uid);
+	                               this.$router.replace(cookie.get('target') || '/home');
+
                                })
                         },
                         isShowFun(){

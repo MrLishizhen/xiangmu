@@ -17,6 +17,7 @@
 		<div class="details_content">
 			<div class="details_centent_top">
 				<span class="centent_top_count" v-text="`共${tracks.length}首`"> </span>
+				<span class="centent_top_collection" @click="collection">收藏歌单</span>
 			</div>
 			<div class="details_centent_box">
 				<router-link :to="fun(item)" class="details_centent_box_item" v-for="(item,i) in tracks"
@@ -58,8 +59,14 @@
                         };
                 },
                 methods: {
-                        fun(item){
+                        collection(){//点击收藏
+                                this.$http({url:`/playlist/subscribe?t=1&id=${this.$route.params.id}`}).then(result=>{
+					console.log('ok');
+                                });
+                        },
+                        fun(item,i){
                                 Cookie.set('gId', this.data.playlist.id);
+
                                 return `/play/${item.id}`;
                         },
                         alia(item){
@@ -84,6 +91,7 @@
                         }
                 },
                 created(){
+                        sessionStorage.removeItem("isReload");
                         this.$store.dispatch('gedan/init', this.$route.params.id).then(() =>{
                                 this.data = this.$store.state.gedan.data;//得到之后直接赋值给本页面
                         });
@@ -92,6 +100,18 @@
 </script>
 
 <style scoped>
+	.centent_top_collection{
+		/*收藏歌单*/
+		position:absolute;
+		right:0;
+		top:0.5rem;
+		height:3rem;
+		font-size:1.2rem;
+		padding:0 0.5rem;
+		line-height: 3rem;
+		border:1px solid red;
+		border-radius: 0.5rem;
+	}
 	a {
 		color: #666;
 	}
