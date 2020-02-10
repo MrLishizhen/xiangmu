@@ -2,10 +2,10 @@
 	<div class="play-page">
 		<div class="play-top">
 			<div class="header">
-				<div class="header_logo"></div>
+				<div class="header_logo" @click="$router.back()"></div>
 				<div class="header_cont">
-					<div class="header_name">
-						<span v-text="name"></span>
+					<div class="header_name ">
+						<span v-text="name" class="ellipsis header_span"></span>
 						<span v-text="alia" class="alia"></span>
 					</div>
 					<div class="ar" v-text="ar"></div>
@@ -18,24 +18,29 @@
 						<img :src="picUrl" alt="" @click="play">
 					</div>
 				</div>
+				<div class="lyric_box">
+					<p class="lyric" v-text="lyricText"></p>
+				</div>
 			</div>
 		</div>
 		<div class="audio">
 			<div class="audio_box">
 				<div class="audio_top">
-					<span class="iconfont gz" @click="xh_gedan" :class="{red:redShow}">&#xe61d;</span>
-					<span class="iconfont xz">&#xe624;</span>
+					<span class="iconfont gz" @click="xh_gedan"
+					      :class="{red:redShow}">&#xe61d;</span>
+					<span class="iconfont xz"
+					      @click="open">&#xe624;</span>
 				</div>
 				<div class="audio_cent">
-					<audio class='audio' ref="audio" :src="url" autoplay ></audio>
-
+					<audio class='audio' ref="audio" :src="url" preload="auto" autoplay></audio>
 					<div class="music-box">
 						<span class="start" v-text="minDate"></span>
-						<div class="load_box">
-							<div class="music-bar musics"></div>
-							<div class="music-play musics"></div>
+						<div class="load_box" ref="load_box">
+							<div class="music-bar musics" ref="bar"></div>
+							<div class="music-play musics" ref="music"></div>
 							<div class="music musics"></div>
-							<div class="music-play-circular" ref="play_circular"></div>
+							<div class="music-play-circular" ref="playCircular"
+							     style="left:0"></div>
 						</div>
 						<span class="end" v-text="maxDate"></span>
 					</div>
@@ -44,7 +49,7 @@
 					<div class="iconfont broadcast-mode" v-html="`${iconMode}`"
 					     @click="iconFunt"></div>
 					<div class="iconfont last-song" @click="last">&#xe60b;</div>
-					<div class="iconfont play" ref="start" >&#xe600;</div>
+					<div class="iconfont play" ref="start">&#xe600;</div>
 					<div class="iconfont next-song" @click="next">&#xe60b;</div>
 					<div class="iconfont song-sheet" @click="show=!show">&#xe636;</div>
 				</div>
@@ -73,14 +78,15 @@
         export default {
                 data(){
                         return {
-                                like_data:[],//保存的是用户喜欢的音乐列表
+                                like_data: [],//保存的是用户喜欢的音乐列表
                                 data_gedan: [],//保存歌曲列表
                                 show: false,//歌单的显示
-                                ar: [],//歌唱者名字
+                                ar: '',//歌唱者名字
                                 alia: '',//
                                 data: [],//保存歌曲数据
+                                dataShow:false,//一个关于是从歌单还是直接进来播放页的标识符
                                 name: '',//歌曲的名字
-                                maxDate: 0,
+                                maxDate: '00:00',
                                 minDate: '00:00',
                                 start: '&#xe600;',
                                 url: '',//歌曲的url
@@ -88,44 +94,82 @@
                                 id: '',//当前歌曲的id
                                 mode: '0',//0表示随机，1表示循环
                                 iconMode: '&#xe77d;',
-	                        biaoshi:false,
-	                        redShow:false,//判断是不是添加了喜欢
+                                biaoshi: false,
+                                redShow: false,//判断是不是添加了喜欢
+                                time: 0,//默认当前时间和总时间的比例
+                                lyric: '',//歌词字符串
+                                lyricData: [],//歌词数组
+                                lyricShow: false,//歌词显不显示
+                                lyricDate: [],//歌词时间
+                                lyricText: '',
                         }
                 },
-	        watch:{
-                        'id'(newValue,oldValue){
-                                this.redShow=false;
-                                      if(newValue&&cookie.get('MUSIC_U')){
-	                                      this.like_data.forEach(item=>{
-                                                      if(item==newValue){
-                                                              //如果当前的歌曲id在用户喜欢的歌单中能找到，则把标识符变为true
-                                                              this.redShow=true;
-                                                      }
-                                              });
+                computed: {}
+                ,
+                watch: {
+                        'id'(newValue, oldValue){
+                                this.redShow = false;
+                                if(newValue && cookie.get('MUSIC_U')){
+                                        this.like_data.forEach(item =>{
+                                                if(item == newValue){
+                                                        //如果当前的歌曲id在用户喜欢的歌单中能找到，则把标识符变为true
+                                                        this.redShow = true;
+                                                }
+                                        });
 
-                                      }
+                                }
                         },
-	        }
-	        ,
+                        minDate(newValue, oldValue){
+                                let show = false;
+                                let a = this.lyricDate.findIndex((item, i) =>{
+                                        return item.includes(newValue);
+                                });
+                                if(a != -1){
+                                        show = true;
+                                        this.lyricText = this.lyricData[a];
+                                }
+
+                        },
+
+                }
+                ,
                 mounted(){
                         let th = this;
                         let audio = this.$refs.audio;
-                        let date = 0;
+                        let date = 0;//总时间
+                        let time = 0;//当前播放时间
                         let start = this.$refs.start;
-			//判断是不是刷新了界面
-                        if(sessionStorage.getItem("isReload")){
-                                this.$refs.start.innerHTML = '&#xe618;';
-                                this.start = '&#xe618;';
+                        let musicBoxWidth = getComputedStyle(this.$refs.load_box).width;
+                        let musicWidth = getComputedStyle(this.$refs.music).width;//获取进度条的总长度
 
-                        }else{
-                                sessionStorage.setItem("isReload", true);
-
-                        }
+                        //判断是不是播放状态
                         audio.addEventListener('canplay', function(){
-                                date = audio.duration;
-                                th.maxDate = th.dateConversion(audio.duration);
+                                date = parseInt(audio.duration);
+                                th.maxDate = th.dateConversion(date);
+//                                th.$nextTick(() =>{
+//                                        if(audio.paused){
+//                                                th.$refs.start.innerHTML = '&#xe618;';
+//                                                th.start = '&#xe618;';
+//                                                console.log(1);
+//                                        }
+//                                })
                         }, false);
 
+
+                        //获取当前的播放时间
+                        setInterval(function(){
+                                time = parseInt(audio.currentTime);
+                                th.minDate = th.dateConversion(time);
+                                if(!audio.paused){
+                                        th.time = time / date;//保存时间的进度比
+                                        (th.$refs.playCircular).style.left = parseInt(musicWidth) * th.time + 'px';
+                                        (th.$refs.bar).style.width = (th.$refs.playCircular).style.left;
+                                }
+                                if(audio.ended){
+                                        th.next(); //结束之后直接判断是那种方式切歌
+                                }
+
+                        }, 1000);
                         start.addEventListener('click', () =>{
                                 if(this.start == '&#xe618;'){
                                         this.$refs.start.innerHTML = "&#xe600;";
@@ -136,67 +180,118 @@
                                         this.start = '&#xe618;';
                                         audio.pause();
                                 }
-                        }, false)
+                        }, false);
+                        th.$refs.load_box.addEventListener('touchstart', function(e){
+                                let X;
+                                let Y;
+                                let x;
+                                if(e.target == th.$refs.playCircular){
+                                        X = 45;//初始对于左侧的距离
+                                        Y = parseInt(musicBoxWidth);
+
+                                }
+                                th.$refs.playCircular.addEventListener('touchmove', function(e){
+
+                                        if(e.target == th.$refs.playCircular && e.targetTouches.length == 1){
+                                                x = e.touches[0].clientX;
+                                                if(x - X >= 0 && (x - X) < Y * 0.98){
+                                                        th.$refs.playCircular.style.left = x - X + 'px';
+                                                        th.minDate = th.dateConversion((date * (x - 45)) / parseInt(musicWidth));
+                                                        (th.$refs.bar).style.width = (th.$refs.playCircular).style.left;
+                                                }
+
+                                        }
+                                });
+                                th.$refs.playCircular.addEventListener('touchend', e =>{
+                                        th.$refs.playCircular.style.left = x - X + 'px';
+                                        th.minDate = th.dateConversion((date * (x - 45)) / parseInt(musicWidth));
+                                        audio.currentTime = (date * (x - 45)) / parseInt(musicWidth);
+                                })
+
+                        });
 
 
                 },
                 created(){
 
-	                if(cookie.get('MUSIC_U')){
-	                        this.$http({url:`/likelist?uid=${cookie.get('uid')}`}).then(result=>{
-	                                this.like_data=result.ids;//拿到用户的喜欢歌单的列表
-	                        })
-	                }
+                        //这里少了一个if 在cookie中存一个歌单的id 通过id找歌单详情，如果没有 就说明不是从歌单来的 就不用找歌单了
+                        if(cookie.get('gId')){
+                                this.$http({url: `/playlist/detail?id=${cookie.get('gId')}`}).then(result =>{
+                                        this.data_gedan = result.playlist.tracks;
+                                });
+                        }else{
+                                //表示只有当前是直接从歌曲进来的  就不需要请求歌单，直接只显示当前的歌曲就可以了
+				this.dataShow=true;
+
+                        }
+
+                        if(cookie.get('MUSIC_U')){
+                                this.$http({url: `/likelist?uid=${cookie.get('uid')}`}).then(result =>{
+                                        this.like_data = result.ids;//拿到用户的喜欢歌单的列表
+                                })
+                        }
+                        //请求歌曲的url
+                        this.$http({url: `/song/url?id=${this.$route.params.gid}`}).then(result =>{
+                                if(result.data[0].url == null){
+                                        this.$tiShi('抱歉这首歌还没有获取到版权');
+                                        this.url = '';
+                                        this.$refs.start.innerHTML = '&#xe618;';
+                                        this.start = '&#xe618;';
+                                }else{
+                                        this.url = result.data[0].url;
+                                        this.$refs.start.innerHTML = "&#xe600;";
+                                        this.start = '&#xe600;';
+                                        this.lyricFun(this.$route.params.gid);
+
+                                }
+                        });
                         //请求歌曲详情
                         this.$http({url: `/song/detail?ids=${this.$route.params.gid}`}).then(result =>{
                                 this.data = result.songs;
                                 this.id = this.$route.params.gid;
                                 this._fuzhi();
-
+				if(this.dataShow){
+				        this.data_gedan=this.data;
+				}
                         });
-                        //请求歌曲的url
-                        this.$http({url: `/song/url?id=${this.$route.params.gid}`}).then(result =>{
 
-                                this.url = result.data[0].url;//获取歌曲的url
-                        });
-                        //这里少了一个if 在cookie中存一个歌单的id 通过id找歌单详情，如果没有 就说明不是从歌单来的 就不用找歌单了
-                        if(cookie.get('gId')){
-                                this.$http({url: `/playlist/detail?id=${cookie.get('gId')}`}).then(result =>{
 
-                                        this.data_gedan = result.playlist.tracks;
 
-                                });
-                        }else{
-                                //表示只有当前是直接从歌曲进来的  就不需要请求歌单，直接只显示当前的歌曲就可以了
-                                this.data_gedan.push(this.data[0]);
-                        }
+                        setTimeout(() =>{
+                                if(this.$refs.audio.paused){
+                                        this.$refs.start.innerHTML = '&#xe618;';
+                                        this.start = '&#xe618;';
 
+                                }
+                        },1000);
 
                 }
                 ,
                 methods: {
+
                         xh_gedan(){
-				if(cookie.get('MUSIC_U')){
-					if(!this.redShow){
-                                                this.$http({url:`/like?id=${this.id}`}).then(result=>{
-                                                        if(result.code==200){
-                                                                console.log('添加成功');
-                                                                this.redShow=true;
+                                if(cookie.get('MUSIC_U')){
+                                        if(!this.redShow){
+                                                this.$http({url: `/like?id=${this.id}`}).then(result =>{
+                                                        if(result.code == 200){
+                                                                this.$tiShi('添加成功');
+                                                                this.redShow = true;
                                                         }
                                                 })
-					}else{
-                                                this.$http({url:`/like?id=${this.id}&like=false`}).then(result=>{
-                                                        if(result.code==200){
-                                                                console.log('取消成功');
-                                                                this.redShow=false;
+                                        }else{
+                                                this.$http({url: `/like?id=${this.id}&like=false`}).then(result =>{
+                                                        if(result.code == 200){
+                                                                this.$tiShi('取消成功');
+                                                                this.redShow = false;
                                                         }
                                                 })
-					}
-				}else{
-				        console.log('您还未登录！');
-				        this.$router.push('/login');
-				}
-                        },
+                                        }
+                                }else{
+                                        this.$tiShi('您还未登录!');
+                                        this.$router.push('/login');
+                                }
+                        }
+                        ,
                         _fuzhi(){
                                 this.name = this.data[0].name;
                                 this.picUrl = this.data[0].al.picUrl;
@@ -206,45 +301,58 @@
                                         arr.push(item.name);
                                 });
                                 this.ar = arr.join('/');
-                        },
+                        }
+                        ,
                         //生成0-随机的随机数
                         _random(max){
                                 let i = Math.random() * (max + 1);
                                 return Math.floor(i);
-                        },
-	                //上一曲
-	                last(){
-				if(this.mode==0){
+                        }
+                        ,
+                        //上一曲
+                        last(){
+                                this.lyric = '';
+                                if(this.mode == 0){
                                         let arr = JSON.parse(sessionStorage.getItem('_play'));
-                                        let id  = arr[arr.length-1];
-                                        if(arr.length!=0){
+                                        let id = arr[arr.length - 1];
+                                        if(arr.length != 0){
                                                 //请求歌曲详情
                                                 this.$http({url: `/song/detail?ids=${id}`}).then(result =>{
                                                         this.data = result.songs;
                                                         this.id = id;
                                                         this._fuzhi();
-
                                                 });
                                                 //请求歌曲的url
                                                 this.$http({url: `/song/url?id=${id}`}).then(result =>{
-                                                        this.url = result.data[0].url;//获取歌曲的url
-                                                });
+                                                        if(result.data[0].url == null){
+                                                                this.$tiShi('抱歉这首歌还没有获取到版权');
+                                                                this.url = '';
+                                                                this.$refs.start.innerHTML = '&#xe618;';
+                                                                this.start = '&#xe618;';
+                                                        }else{
+                                                                this.url = result.data[0].url;
+                                                                this.$refs.start.innerHTML = "&#xe600;";
+                                                                this.start = '&#xe600;';
 
+                                                                this.lyricFun();
+                                                        }
+                                                });
                                                 //删除arr的最后一个元素
                                                 arr.pop();
-                                                sessionStorage.setItem('_play',JSON.stringify(arr));
+                                                sessionStorage.setItem('_play', JSON.stringify(arr));
                                         }else{
-                                                console.log('这是你最开始听得一首歌呦!');
+                                                this.$tiShi('这是你最开始听得一首歌呦!');
+
                                         }
-				}else if(this.mode==1){
-				        //这是循环模式
-                                        let i = this.data_gedan.findIndex((item,i)=>{
-                                                return item.id==this.id;
+                                }else if(this.mode == 1){
+                                        //这是循环模式
+                                        let i = this.data_gedan.findIndex((item, i) =>{
+                                                return item.id == this.id;
                                         });
-                                        if(i==0){
-                                                i=this.data_gedan.length-1;
+                                        if(i == 0){
+                                                i = this.data_gedan.length - 1;
                                         }else{
-                                                i=i-1;
+                                                i = i - 1;
                                         }
                                         //请求歌曲详情
                                         this.$http({url: `/song/detail?ids=${this.data_gedan[i].id}`}).then(result =>{
@@ -255,21 +363,32 @@
                                         });
                                         //请求歌曲的url
                                         this.$http({url: `/song/url?id=${this.data_gedan[i].id}`}).then(result =>{
-                                                this.url = result.data[0].url;//获取歌曲的url
+                                                if(result.data[0].url == null){
+                                                        this.$tiShi('抱歉这首歌还没有获取到版权');
+                                                        this.url = '';
+                                                        this.$refs.start.innerHTML = '&#xe618;';
+                                                        this.start = '&#xe618;';
+                                                }else{
+                                                        this.url = result.data[0].url;
+                                                        this.$refs.start.innerHTML = "&#xe600;";
+                                                        this.start = '&#xe600;';
+                                                }
                                         });
-				}
-	                },
+                                }
+                        }
+                        ,
                         next(){
-                                if(this.mode==0){
+                                this.lyric = '';
+                                if(this.mode == 0){
                                         if(sessionStorage.getItem('_play')){
                                                 let arr = JSON.parse(sessionStorage.getItem('_play'));
                                                 arr.push(this.id);
-                                                sessionStorage.setItem('_play',JSON.stringify(arr));
+                                                sessionStorage.setItem('_play', JSON.stringify(arr));
 
                                         }else{
-                                                let arr=[];
+                                                let arr = [];
                                                 arr.push(this.id);
-                                                sessionStorage.setItem('_play',JSON.stringify(arr));
+                                                sessionStorage.setItem('_play', JSON.stringify(arr));
                                         }
 
                                         let length = this.data_gedan.length - 1;
@@ -279,20 +398,29 @@
                                         this._fuzhi();//调用赋值
                                         this.id = this.data[0].id;
                                         this.$http({url: `/song/url?id=${this.id}`}).then(result =>{
-                                                this.url = result.data[0].url;//获取歌曲的url
-                                                this.$refs.start.innerHTML = "&#xe600;";
-                                                this.start = '&#xe600;';
+                                                if(result.data[0].url == null){
+                                                        this.$tiShi('抱歉这首歌还没有获取到版权');
+                                                        this.url = '';
+                                                        this.$refs.start.innerHTML = '&#xe618;';
+                                                        this.start = '&#xe618;';
+                                                }else{
+                                                        this.url = result.data[0].url;
+                                                        this.$refs.start.innerHTML = "&#xe600;";
+                                                        this.start = '&#xe600;';
+                                                        this.lyricFun();
+                                                }
+
                                         });
-                                }else if(this.mode==1){
+                                }else if(this.mode == 1){
                                         //表示这是循环结构
 
-                                        let i = this.data_gedan.findIndex((item,i)=>{
-					        return item.id==this.id;
-					});
-                                        if(i==(this.data_gedan.length-1)){
-                                                i=0;
+                                        let i = this.data_gedan.findIndex((item, i) =>{
+                                                return item.id == this.id;
+                                        });
+                                        if(i == (this.data_gedan.length - 1)){
+                                                i = 0;
                                         }else{
-                                                i=i+1;
+                                                i = i + 1;
                                         }
                                         //请求歌曲详情
                                         this.$http({url: `/song/detail?ids=${this.data_gedan[i].id}`}).then(result =>{
@@ -303,36 +431,52 @@
                                         });
                                         //请求歌曲的url
                                         this.$http({url: `/song/url?id=${this.data_gedan[i].id}`}).then(result =>{
-                                                this.url = result.data[0].url;//获取歌曲的url
+                                                if(result.data[0].url == null){
+                                                        this.$tiShi('抱歉这首歌还没有获取到版权');
+                                                        this.url = '';
+                                                        this.$refs.start.innerHTML = '&#xe618;';
+                                                        this.start = '&#xe618;';
+                                                }else{
+                                                        this.url = result.data[0].url;
+                                                        this.$refs.start.innerHTML = "&#xe600;";
+                                                        this.start = '&#xe600;';
+                                                        this.lyricFun();
+                                                }
                                         });
                                 }
                         }
                         ,
                         music(id){
-
-                                this.id=id;
+                                this.id = id;
                                 this.$http({url: `/song/url?id=${id}`}).then(result =>{
-                                        if(result.data[0].url==null){
-                                                console.log('抱歉这首歌还没有获取到版权');
+                                        if(result.data[0].url == null){
+                                                this.$tiShi('抱歉这首歌还没有获取到版权');
+                                                this.last();
+                                                this.$refs.start.innerHTML = '&#xe618;';
+                                                this.start = '&#xe618;';
                                         }else{
                                                 this.url = result.data[0].url;
-
+                                                this.$refs.start.innerHTML = "&#xe600;";
+                                                this.start = '&#xe600;';
+                                                this.lyricFun();
                                         }
 
                                 });
-                                let arrMusic=this.data_gedan.find(item=>{
-                                        return item.id===id;
+                                let arrMusic = this.data_gedan.find(item =>{
+                                        return item.id === id;
                                 });
                                 this.name = arrMusic.name;
-                                this.picUrl =arrMusic.al.picUrl;
+                                this.picUrl = arrMusic.al.picUrl;
                                 this.alia = arrMusic.alia[0];
                                 let arr = [];
                                 arrMusic.ar.forEach(item =>{
                                         arr.push(item.name);
                                 });
                                 this.ar = arr.join('/');
+                                this.$refs.start.innerHTML = "&#xe600;";
+                                this.start = '&#xe600;';
                         }
-	                ,
+                        ,
                         //点击时改变播放方式
                         iconFunt(){
                                 if(this.mode == 0){
@@ -342,11 +486,36 @@
                                         this.mode = 0;
                                         this.iconMode = '&#xe77d;';
                                 }
-                        },
+                        }
+                        ,
+                        //下载功能
+                        open(){
+                              this.$tiShi('暂不支持下载功能');
+                        }
+                        ,
                         //点击图片显示歌词
                         play(){
 
-                        },
+                        }
+                        ,
+                        lyricFun(id = this.id){
+                                this.$http({url: `/lyric?id=${id}`}).then(result =>{
+                                        if(result.sgc == true || result.lrc.lyric == ''){
+                                                this.lyricShow = true;
+                                                this.lyricText = '暂无歌词';
+                                        }else{
+                                                this.lyric = result.lrc.lyric;
+                                                let arr = this.lyric.match(/\[.*\]/g);
+                                                this.lyricDate = arr;
+                                                let brr = this.lyric.match(/(\].*\[?)/g);
+                                                brr = brr.map(item =>{
+                                                        return item.slice(1);
+                                                });
+                                                this.lyricData = brr;
+                                        }
+                                })
+                        }
+                        ,
                         //计算总时间
                         dateConversion(item){
                                 let i = 0, s = parseInt(item);
@@ -365,13 +534,15 @@
                                 return [zero(i), zero(s)].join(":");
                         }
                 }
-        };
+        }
+        ;
 </script>
 
 <style scoped>
-	.red{
-		color:#dd4c4c !important;
+	.red {
+		color: #dd4c4c !important;
 	}
+
 	@keyframes myfirst {
 		from {
 			transform: rotate(0deg)
@@ -395,6 +566,7 @@
 	}
 
 	.picUrl-box {
+		margin: 10rem 0;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -402,6 +574,20 @@
 		border-radius: 50%;
 		height: 20rem;
 		background-color: rgba(0, 0, 0, .5);
+		flex-shrink: 0;
+
+	}
+
+	.lyric {
+		color: #fff;
+		font-size: 1.3rem;
+		text-align: center;
+	}
+
+	.lyric_box {
+
+		flex-grow: 1;
+		width: 100%;
 	}
 
 	.content {
@@ -409,6 +595,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		flex-direction: column;
+
 	}
 
 	.list > h3 {
@@ -457,12 +645,14 @@
 		bottom: 0;
 		left: 0;
 		width: 100%;
+
 	}
 
 	.gedanShow {
 		position: fixed;
 		width: 100%;
 		height: 100%;
+		z-index: 10;
 		background-color: rgba(0, 0, 0, .5);
 	}
 
@@ -496,12 +686,14 @@
 	}
 
 	.music-play-circular {
+		touch-action: none;
 		width: 0.5rem;
 		height: 0.5rem;
-		background-color: red;
+		background-color: #000;
 		position: absolute;
 		left: 0;
 		border-radius: 50%;
+		z-index: 9;
 	}
 
 	.music-play {
@@ -509,7 +701,8 @@
 	}
 
 	.music-bar {
-		background-color: #5b5757;
+		background-color: #000000;
+		z-index: 5;
 	}
 
 	div.music {
@@ -520,6 +713,7 @@
 		position: absolute;
 		width: 98%;
 		height: 0.1rem;
+		left: 0;
 
 	}
 
@@ -542,7 +736,6 @@
 		display: flex;
 		width: 100%;
 		height: 1.5rem;
-		background-color: #fff;
 
 	}
 
@@ -581,11 +774,16 @@
 		color: #ccc;
 	}
 
+	.header_span {
+
+	}
+
 	.header_name {
 		height: 2rem;
 		font-size: 1.4rem;
 		color: #fff;
-
+		width: 100%;
+		overflow: hidden;
 	}
 
 	.header_cont {
@@ -595,13 +793,15 @@
 	}
 
 	.search {
-		width: 4rem;
-		height: 4rem;
+		width: 2.5rem;
+		height: 2.5rem;
+		flex-shrink: 0;
 	}
 
 	.header_logo {
 		width: 2.5rem;
 		height: 2.5rem;
+		flex-shrink: 0;
 		background: url(./circle_logo.png) no-repeat center/100%;
 	}
 

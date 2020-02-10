@@ -18,7 +18,7 @@ const router =new VueRouter({
            {path:'/login',component:pages.login},//登录
            {path:'/register',component:pages.register},//注册
            {path:'/setUp',component:pages.setUp},//退出登录
-
+           {path:'*',component:pages.f}//404界面
            ]
 });
 export default router

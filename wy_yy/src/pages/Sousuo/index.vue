@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		<div class="search_item_box" v-show="search_.length>0">
-			<div class="search-item" v-for="item in search_" :key="item.id">
+			<div class="search-item" v-for="item in search_" :key="item.id" @click="$router.push(`/play/${item.id}`)">
 				<div class="search_item_name">
 					<span  v-text="item.name" class="search_name ellipsis"></span>
 					<span v-text="searchPalyName(item.artists)" class="span_play_name ellipsis"></span>
@@ -29,6 +29,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+	import cookie from 'js-cookie';
         export default {
                 name: "search",
                 data(){
@@ -60,6 +61,7 @@
                         }
                 },
                 created(){
+                        cookie.remove('gId');
                         this.$http({url: '/search/hot'}).then(result =>{
 
                                 this.hot_Search = result.result.hots;

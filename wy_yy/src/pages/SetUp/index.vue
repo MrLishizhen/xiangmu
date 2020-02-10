@@ -33,10 +33,14 @@
 		width:50%;
 		border:1px solid red;
 		display:block;
-		margin:0 auto;
+		/*margin:0 auto;*/
 		padding:0.8rem 1rem;
 		border-radius: 0.5rem;
 		color:red;
+		position:fixed;
+		bottom:1rem;
+		left:50%;
+		margin-left:-25%;
 	}
 
 </style>

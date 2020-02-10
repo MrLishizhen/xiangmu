@@ -10,6 +10,8 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/dist/css/swiper.css';
 import './assets/font/iconfont.css';
 //注册这个组件
+import tishi from './assets/tishi';
+Vue.use(tishi);
 
 Vue.use(VueAwesomeSwiper);
 // import APlayer from '@moefe/vue-aplayer';
@@ -19,7 +21,6 @@ Vue.use(VueAwesomeSwiper);
 //         productionTip: true,
 // });
 Vue.prototype.$http=http;
-
 Vue.config.productionTip = false;
 
 new Vue({

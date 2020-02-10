@@ -78,6 +78,7 @@
 
 <script type="text/ecmascript-6">
         import Nav from '../../components/Nav.vue';
+        import cookie from 'js-cookie';
 
         export default {
                 name: 'home',
@@ -111,6 +112,7 @@
                      }
                 },
                 created(){
+                        cookie.remove('gId');
                         this.$http({url: '/banner', method: 'get'}).then(result =>{
                                 this.banners = result.banners;
                         });

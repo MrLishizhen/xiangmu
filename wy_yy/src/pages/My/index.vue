@@ -20,14 +20,14 @@
 		<div class="my_content">
 
 			<div class="cont_herder">
-				<div class="cont_header_item" v-for="item in nav" v-text="item.name"
-				     :class="{red:item.isShow}" @click="gr_fun(item)"></div>
+				<div class="cont_header_item" v-for="(item,i) in nav" v-text="item.name"
+				     :class="{red:item.isShow}" @click="gr_fun(item,i)"></div>
 			</div>
 			<div class="cont_content" v-if="login">
-
 				<!--<songSheet :list="list" class="song"></songSheet>-->
-				<div class="song_sheet_box">
-					<div class="song_sheet_item" v-for="item in gedan_data">
+				<!--喜欢的音乐-->
+				<div class="song_sheet_box" v-if="i==0">
+					<div class="song_sheet_item" v-for="item in gedan_data" @click="$router.push(`/details/${item.id}`)">
 						<div class="img">
 							<img :src="item.coverImgUrl" alt="">
 						</div>
@@ -39,6 +39,20 @@
 							
 
 				</div>
+				<!--喜欢的歌曲-->
+				<div class="gequ_box" v-if="i==3">
+					<div class="gequ_item" v-for="(item,i) in xh_gequ" :key="item.id" @click="$router.push(`/play/${item.id}`)">
+						<div class="gequ_item_left">
+							<span v-text="item.name" class="itemName"></span>
+							<span v-text="ar(item)" class="gequ_ar"></span>
+						</div>
+						<div class="gequ_item_right item_red iconfont" @click="quXiao(item,i)">&#xe61d;</div>
+					</div>
+				</div>
+
+				<div class="cw" v-show="cw">
+					<div class="">抱歉您还没有添加这个模块的数据</div>
+				</div>
 			</div>
 			<div class="no_login" v-else>
 				亲还没有登录呦，登录之后能看到您的个人收藏哦！！
@@ -48,7 +62,6 @@
 
 	</div>
 </template>
-
 <script type="text/ecmascript-6">
         import Nav from '../../components/Nav.vue';
         import songSheet from './songSheet.vue';
@@ -65,29 +78,68 @@
                                 gedan_data: null,
                                 isShow: false,
                                 tuichu_is: false,
+	                        xh_gequ:[],
+	                        i:0,//
                                 nav: [
                                         {name: '歌单', isShow: true},
                                         {name: '专辑', isShow: false},
                                         {name: '歌手', isShow: false},
                                         {name: '歌曲', isShow: false}
-                                ]
+                                ],
+	                        cw:false,
                         }
                 },
+
                 watch: {
                         list(newValue, oldValue){
                                 this.gedan_data = newValue.playlist;
                         }
                 },
                 methods: {
-                        gr_fun(item){
+                        quXiao(item,i){
+				this.$http({url:`/like?id=${item.id}&like=false`}).then(result=>{
+				        if(result.code==200){
+				                this.xh_gequ.splice(i,1);
+				                this.$tiShi('移除成功');
+				        }
+				})
+                        },
+                        ar(item){
+                                let arr=[];
+                                item.ar.forEach(item=>{
+                                        arr.push(item.name);
+                                });
+				return arr.join('/');
+                        },
+                        gr_fun(item,i=0){
                                 this.nav.forEach(item =>{
                                         item.isShow = false;
                                 });
                                 item.isShow = true;
+                                switch(i){
+	                                case 0:
+	                                        this.i=0;
+                                                this.cw=false;
+	                                        return;
+	                                case 3:
+	                                        this.i=3;
+                                                this.cw=false;
+	                                        this.$http({url:`/playlist/detail?id=${cookie.get('xh_id')}`}).then(result=>{
+	                                                console.log(result);
+	                                                this.xh_gequ=result.playlist.tracks;
+
+	                                        });
+		                                return ;
+
+                                        default:
+                                                this.i=4;
+	                                        this.cw=true;
+
+                                }
+
                         }
                 },
                 created(){
-
                         if(cookie.get('uid')){
                                 this.login = true;
                                 let uid = cookie.get('uid');
@@ -108,6 +160,50 @@
         };
 </script>
 <style scoped>
+	.cw{
+		width:100%;
+		height:100%;
+		display:flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.item_red{
+		color:red;
+	}
+	.itemName{
+		height:3rem;
+		font-size:1.3rem;
+		line-height:3rem;
+
+	}
+	.gequ_ar{
+		height:2rem;
+		line-height:2rem;
+		color:#e0e0e0;
+	}
+	.gequ_item_right{
+		width:5rem;
+		flex-shrink: 0;
+		line-height: 5rem;
+		text-align: center;
+	}
+	.gequ_item_left{
+		padding-left:0.5rem;
+		flex-grow: 1;
+		overflow:auto;
+		display:flex;
+		flex-direction: column;
+	}
+	.gequ_item{
+		height:5.0rem;
+		display:flex;
+		box-shadow: 0rem 0.1rem 0.3rem #e0e0e0;
+		margin:0.5rem 0;
+
+	}
+	.gequ_box{
+		padding:1.0rem;
+	}
 	.song_sheet_page {
 		width: 100%;
 		height: 100%;

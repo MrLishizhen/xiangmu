@@ -10,6 +10,7 @@ import play from './Play';//歌曲播放页
 import login from './Login';//歌曲播放页
 import register from './Register';//注册
 import setUp from './SetUp';//设置
+import f from './f';//设置
 
 
-export default {home,list,classify,singer,my,sousuo,details,play,login,register,setUp};
+export default {home,list,classify,singer,my,sousuo,details,play,login,register,setUp,f};
